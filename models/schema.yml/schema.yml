@@ -3,14 +3,43 @@ version: 2
 sources:
   - name: raw
     schema: gz_raw_data
-    description: raw data greenweez finance from le wagon
+    description: raw data greenweez finance from le wagon 
     tables:
       - name: sales
         identifier: raw_gz_sales
         description: raw data information on orders, product, revenue
+        columns:
+          - name: date_date
+            description: the date of purchase
+          - name: orders_id
+            description: unique identifier for each order placed
+          - name: products_id
+            description: primary key
+            tests:
+              - unique
+          - name: revenue
+            description: revenue for each order placed
+          - name: quantity
+            description: number of products in each order
       - name: product
         identifier: raw_gz_product
         description: raw data on product and purchase price
+        columns:
+          - name: products_id
+            description: primary key of the table
+            tests:
+              - unique
+          - name: purchase_price
+            description: cost of the product
       - name: ship
         identifier: raw_gz_ship
         description: raw data on order's shipping fee, log and ship cost
+        columns:
+          - name: orders_id
+            description: primary and foreign key
+          - name: shipping_fee
+            description: cost of shipping the product to warehouse
+          - name: log_cost
+            description: logistical cost of each order
+          - name: ship_cost
+            description: cost of shipping each order
