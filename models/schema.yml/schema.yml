@@ -12,15 +12,16 @@ sources:
           - name: date_date
             description: the date of purchase
           - name: orders_id
-            description: unique identifier for each order placed
-          - name: products_id
-            description: primary key
-            tests:
-              - unique
+            description: foreign key to ship
+          - name: pdt_id
+            description: foreign key to product
           - name: revenue
-            description: revenue for each order placed
+            description: the amount paid by the customer to purchase the product. revenue = quantity * selling price
           - name: quantity
-            description: number of products in each order
+            description: the quantity of products purchased for this order
+        tests:
+          - unique:
+              column_name: "(orders_id || '-' || pdt_id)"
       - name: product
         identifier: raw_gz_product
         description: raw data on product and purchase price
@@ -29,17 +30,21 @@ sources:
             description: primary key of the table
             tests:
               - unique
+              - not_null 
           - name: purchase_price
-            description: cost of the product
+            description: the purchase price of the product
       - name: ship
         identifier: raw_gz_ship
         description: raw data on order's shipping fee, log and ship cost
         columns:
           - name: orders_id
-            description: primary and foreign key
+            description: primary key of te table
+            tests:
+              - unique 
+              - not_null 
           - name: shipping_fee
-            description: cost of shipping the product to warehouse
+            description: the price customer pays for shipping
           - name: log_cost
-            description: logistical cost of each order
+            description: the cost of preparing the parcel in the warehouse
           - name: ship_cost
-            description: cost of shipping each order
+            description: the shipping cost paid by Greenweez to the carrier/transporter
