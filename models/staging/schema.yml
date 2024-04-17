@@ -7,7 +7,7 @@ sources:
     tables:
       - name: sales
         identifier: raw_gz_sales
-        description: raw data information on orders, product, revenue
+        description: raw data information on orders, product, revenue 
         columns:
           - name: date_date
             description: the date of purchase 
@@ -84,5 +84,5 @@ models:
       - name: finance_days
         description: finance calculation per days
       
-  - name: finance_days
+  - name: finance_days 
 

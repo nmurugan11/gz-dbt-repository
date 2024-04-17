@@ -1,0 +1,6 @@
+models:
+    greenweez_project:
+        mart:
+            materialized: table
+            finance:
+                schema: finance
