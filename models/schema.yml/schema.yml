@@ -10,7 +10,7 @@ sources:
         description: raw data information on orders, product, revenue
         columns:
           - name: date_date
-            description: the date of purchase
+            description: the date of purchase 
           - name: orders_id
             description: foreign key to ship
           - name: pdt_id

@@ -15,3 +15,15 @@ SELECT
 FROM {{ref("int_orders_operational")}}
 GROUP BY date_date
 ORDER BY date_date DESC
+
+#Configuring models
+models:
+    greenweez_project:
+        intermediate:
+            materialized: view
+        mart:
+            materialized: table
+            finance:
+                schema: finance
+            supply chain:
+                schema: supply_chain
