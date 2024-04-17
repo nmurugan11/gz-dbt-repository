@@ -48,3 +48,49 @@ sources:
             description: the cost of preparing the parcel in the warehouse
           - name: ship_cost
             description: the shipping cost paid by Greenweez to the carrier/transporter
+      - name: int_sales_margin
+        tests:
+            - unique:
+                column_name:  "(orders_id || '-' || products_id)" 
+            - not_null:
+                column_name:
+                  - orders_id
+                  - products_id
+                  - margin
+                  - purchase_cost
+                  - date_date
+                  - revenue
+                  - quantity 
+    models:
+      - name: stg_raw_product
+      - name: stg_raw_sales
+      - name: stg_raw_ship
+      - name: int_sales_margin
+        description: margin calculation per order line / product sale
+        columns:
+          - name: margin
+            description: margin = revenue - purchase_cost
+          - name: purchase_cost
+            description: purchase_cost = quantity * purchase_price
+          - name: int_orders_margin
+            description: margin calculation per order
+            columns:
+              - name: orders_id
+                description: primary key
+              - name: margin
+                description: margin = revenue - purchase_cost
+              - name: purchase_cost
+                description: purchase_cost = quantity * purchase_price
+              - name: date_date
+                description: date of the order
+              - name: revenue
+                description: sum of revenue per order
+              - name: quantity
+                description: sum of quantity per order
+              - name: int_orders_operatiional
+                description: operational margin calculation per order
+                columns:
+                  name: operational_margin
+                  description: operational margin = margin + shipping fee - log_cost - ship_cost
+              - name: finance_days
+                description: finance calculation per days
